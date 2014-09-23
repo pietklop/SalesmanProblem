@@ -45,7 +45,7 @@ namespace SalesmanProblem
                 }
 
                 // stop when it does not improve anymore
-                if (i > lastImprovement + 1000)
+                if (i > lastImprovement + 100)
                 {
                     Console.WriteLine();
                     Console.WriteLine("Finished in {0} msec", watch.ElapsedMilliseconds);

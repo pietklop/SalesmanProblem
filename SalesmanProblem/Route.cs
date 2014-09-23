@@ -11,7 +11,7 @@ namespace SalesmanProblem
         public City[] Cities = new City[DistanceMatrix.AMOUNT];
         private int total;
 
-        static Random random = new Random();
+        public static Random random = new Random();
 
         public Route(DistanceMatrix distanceMatrix)
         {
@@ -101,13 +101,7 @@ namespace SalesmanProblem
                 child2.Mutate();
             }
 
-            if (Total() < child1.Total())
-                child1 = this; // no improvement
-            
-            if (extRoute.Total() < child2.Total())
-                child2 = extRoute; // no improvement
-
-            return new List<Route>{child1, child2};
+            return new List<Route>{child1, child2, this, extRoute}; // keep the parents in the population
         }
 
         /// <summary>

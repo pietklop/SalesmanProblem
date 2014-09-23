@@ -27,9 +27,13 @@ namespace SalesmanProblem
         /// </summary>
         public void CreateNextGeneration()
         {
-            int take = Routes.Count/2;
+            List<Route> temp = new List<Route>();
+            for (int i = 0; i < 100; i++)
+                temp.Add(Routes[Route.random.Next(Routes.Count)]);
+            int take = 1000 - temp.Count;
             if (take%2 == 1) take++; // so sad if one can not make any childs, add one
             Routes = Routes.Take(take).ToList();
+            Routes.AddRange(temp);
             Mix();
             List<Route> childs = new List<Route>();
             for (int i = 0; i < Routes.Count; i += 2)
