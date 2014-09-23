@@ -31,15 +31,18 @@ namespace SalesmanProblem
             for (int i = 0; i < 100; i++)
                 temp.Add(Routes[Route.random.Next(Routes.Count)]);
             int take = 1000 - temp.Count;
-            if (take%2 == 1) take++; // so sad if one can not make any childs, add one
             Routes = Routes.Take(take).ToList();
             Routes.AddRange(temp);
-            Mix();
+
             List<Route> childs = new List<Route>();
-            for (int i = 0; i < Routes.Count; i += 2)
-                childs.AddRange(Routes[i].CrossOver(Routes[i + 1]));
-            
-            Routes = childs;
+            foreach (Route t in Routes) 
+            {
+                Route tmp = Route.Clone(t);
+                tmp.Mutate();
+                childs.Add(tmp);
+            }
+
+            Routes.AddRange(childs);
             Distinct();
             Routes = Routes.OrderBy(x => x.Total()).ToList();
         }
@@ -50,23 +53,6 @@ namespace SalesmanProblem
         private void Distinct()
         {
             Routes = Routes.GroupBy(x => x.ToString()).Select(grp => grp.First()).ToList();
-        }
-
-        /// <summary>
-        /// Mix the list, to prevent inbreed :)
-        /// </summary>
-        private void Mix()
-        {
-            List<Route> temp = new List<Route>();
-            Random random = new Random();
-            int n = Routes.Count;
-            for (int i = 0; i < n; i++)
-            {
-                int index = random.Next(Routes.Count);
-                temp.Add(Routes[index]);
-                Routes.RemoveAt(index);
-            }
-            Routes = temp;
         }
 
     }
