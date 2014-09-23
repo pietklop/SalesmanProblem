@@ -17,7 +17,7 @@ namespace SalesmanProblem
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            pop.GenerateRandom(100000);
+            pop.GenerateRandom(1000);
             const int nGenerations = 100;
 
             int i=0;
