@@ -18,11 +18,10 @@ namespace SalesmanProblem
             watch.Start();
 
             pop.GenerateRandom(100000);
+            const int nGenerations = 100;
 
             int i=0;
             int min = 9999;
-            int lastImprovement = 0;
-
 
             // iterate
             while(true)
@@ -40,12 +39,10 @@ namespace SalesmanProblem
                 if (i > 10 && pop.Routes.First().Total() < min)
                 {
                     min = pop.Routes.First().Total();
-                    lastImprovement = i;
                     //Console.ReadLine();
                 }
 
-                // stop when it does not improve anymore
-                if (i > lastImprovement + 100)
+                if (i >= nGenerations)
                 {
                     Console.WriteLine();
                     Console.WriteLine("Finished in {0} msec", watch.ElapsedMilliseconds);
