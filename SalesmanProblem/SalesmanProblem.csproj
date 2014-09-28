@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="City.cs" />
     <Compile Include="DistanceMatrix.cs" />
     <Compile Include="Population.cs" />
     <Compile Include="Program.cs" />
